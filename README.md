@@ -10,6 +10,50 @@ Into this:
 
 ![After](images/after.png)
 
+## Themes
+
+It's really easy to build your own theme!
+
+#### Freedom
+
+```ruby
+PryBloodline.configure do |c|
+  c.line_color = :white
+  c.name_color = :blue
+  c.path_color = :red
+  c.separator = "★"
+  c.separator_color = :white
+end
+```
+
+![Freedom](images/freedom.png)
+
+#### Blood
+
+```ruby
+PryBloodline.configure do |c|
+  c.line_color = :light_white
+  c.name_color = :light_red
+  c.path_color = :red
+  c.separator_color = :light_black
+end
+```
+
+![Blood](images/blood.png)
+
+### Thor
+
+```ruby
+PryBloodline.configure do |c|
+  c.line_color = :red
+  c.name_color = :white
+  c.path_color = :blue
+  c.separator = "⚡"
+end
+```
+
+![Thor](images/thor.png)
+
 ## Installation
 
 Add this line to your application's Gemfile:
