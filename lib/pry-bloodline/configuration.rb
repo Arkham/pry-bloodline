@@ -33,11 +33,11 @@ module PryBloodline
 
     DEFAULTS = {
       name: "pry",
-      line_color: :white,
-      name_color: :blue,
-      path_color: :white,
+      line_color: :light_black,
+      name_color: :green,
+      path_color: :light_blue,
       separator: "\u00BB",
-      separator_color: :red,
+      separator_color: :light_green,
       name_proc: DEFAULT_NAME_PROC,
       line_proc: DEFAULT_LINE_PROC,
       path_proc: DEFAULT_PATH_PROC,
