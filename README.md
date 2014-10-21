@@ -2,6 +2,14 @@
 
 A glorious descendant of a noble lineage of status lines, to be used with Pry.
 
+It turns this:
+
+![Before](images/before.png)
+
+Into this:
+
+![After](images/after.png)
+
 ## Installation
 
 Add this line to your application's Gemfile:
