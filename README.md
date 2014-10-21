@@ -90,6 +90,31 @@ Then:
 
     $ pry
 
+## Configuration
+
+Here are all the fields you can configure:
+
+```ruby
+PryBloodline.configure do |c|
+  c.name = "pry"
+  c.line_color = :light_black
+  c.name_color = :green
+  c.path_color = :light_blue
+  c.separator = "\u00BB"
+  c.separator_color = :light_green
+  c.name_proc = proc { c.name.colorize(c.name_color) }
+  c.line_proc = proc { |obj, level, pry| "[#{pry.input_array.size}]".colorize(c.line_color) }
+  c.path_proc = proc { |obj, level, pry| "(#{Pry.view_clip(obj)})".colorize(c.path_color) }
+  c.separator_proc = proc { c.separator.colorize(c.separator_color }
+end
+```
+
+This configuration yields this theme:
+
+![Custom](images/custom.png)
+
+Check the source code for more details on this ;)
+
 ## Contributing
 
 1. Fork it ( https://github.com/Arkham/pry-bloodline/fork )
