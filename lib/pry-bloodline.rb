@@ -31,9 +31,6 @@ module PryBloodline
     end
 
     def setup!(name = "pry")
-      colored_name = name.colorize(name_color)
-      colored_separator = separator.colorize(separator_color)
-
       colorize = proc do |message|
         if PryBloodline.color_enabled?
           message
@@ -43,16 +40,16 @@ module PryBloodline
       end
 
       prompt_without_separator = proc do |object, level, _pry_|
-        "#{line_proc.(object, level, _pry_)} #{colored_name} #{path_proc.(object, level, _pry_)}"
+        "#{line_proc.(object, level, _pry_)} #{name_proc.(name)} #{path_proc.(object, level, _pry_)}"
       end
 
       prompt = proc do |object, level, _pry_|
-        colorize.("#{prompt_without_separator.(object, level, _pry_)} #{colored_separator}  ")
+        colorize.("#{prompt_without_separator.(object, level, _pry_)} #{separator_proc.()}  ")
       end
 
       multiline_prompt = proc do |object, level, _pry_|
         padding = ' ' * prompt_without_separator.(object, level, _pry_).uncolorize.size
-        colorize.("#{padding} #{colored_separator}  ")
+        colorize.("#{padding} #{separator_proc.()}  ")
       end
 
       Pry.config.prompt = [ prompt, multiline_prompt ]

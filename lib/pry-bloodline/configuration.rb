@@ -1,8 +1,15 @@
 module PryBloodline
   class Configuration
+    def self.configuration
+      PryBloodline.configuration
+    end
 
     DEFAULT_LINE_PROC = proc do |_, _, _pry_|
-      "[#{_pry_.input_array.size.to_s.bold}]"
+      "[#{_pry_.input_array.size.to_s.bold}]".colorize(configuration.line_color)
+    end
+
+    DEFAULT_NAME_PROC = proc do |name|
+      name.colorize(configuration.name_color)
     end
 
     DEFAULT_PATH_PROC = proc do |_, _, _pry_|
@@ -12,19 +19,27 @@ module PryBloodline
         else
           Pry.view_clip(b.eval("self"))
         end
-      end.join("/")
+      end.join("/").colorize(configuration.path_color)
+    end
+
+    DEFAULT_SEPARATOR_PROC = proc do
+      configuration.separator.colorize(configuration.separator_color)
     end
 
     DEFAULT_SEPARATOR = "\u00BB"
 
     DEFAULTS = {
-      name_color: :blue,
-      line_proc: DEFAULT_LINE_PROC,
       line_color: :white,
-      path_proc: DEFAULT_PATH_PROC,
+      name_color: :blue,
       path_color: :white,
+      separator_color: :red,
+
       separator: DEFAULT_SEPARATOR,
-      separator_color: :red
+
+      name_proc: DEFAULT_NAME_PROC,
+      line_proc: DEFAULT_LINE_PROC,
+      path_proc: DEFAULT_PATH_PROC,
+      separator_proc: DEFAULT_SEPARATOR_PROC,
     }.freeze
 
     DEFAULT_METHODS = DEFAULTS.keys
