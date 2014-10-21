@@ -1,41 +1,43 @@
 module PryBloodline
   class Configuration
+
     def self.configuration
       PryBloodline.configuration
     end
 
-    DEFAULT_LINE_PROC = proc do |_, _, _pry_|
-      "[#{_pry_.input_array.size.to_s.bold}]".colorize(configuration.line_color)
+    def self.c
+      configuration
     end
 
-    DEFAULT_NAME_PROC = proc do |name|
-      name.colorize(configuration.name_color)
+    DEFAULT_LINE_PROC = proc do |object, level, _pry_|
+      "[#{_pry_.input_array.size.to_s.bold}]".colorize(c.line_color)
     end
 
-    DEFAULT_PATH_PROC = proc do |_, _, _pry_|
+    DEFAULT_PATH_PROC = proc do |object, level, _pry_|
       _pry_.binding_stack.map.each_with_index do |b, index|
         if index.zero?
           "~"
         else
           Pry.view_clip(b.eval("self"))
         end
-      end.join("/").colorize(configuration.path_color)
+      end.join("/").colorize(c.path_color)
     end
 
     DEFAULT_SEPARATOR_PROC = proc do
-      configuration.separator.colorize(configuration.separator_color)
+      c.separator.colorize(c.separator_color)
     end
 
-    DEFAULT_SEPARATOR = "\u00BB"
+    DEFAULT_NAME_PROC = proc do
+      c.name.colorize(c.name_color)
+    end
 
     DEFAULTS = {
+      name: "pry",
       line_color: :white,
       name_color: :blue,
       path_color: :white,
+      separator: "\u00BB",
       separator_color: :red,
-
-      separator: DEFAULT_SEPARATOR,
-
       name_proc: DEFAULT_NAME_PROC,
       line_proc: DEFAULT_LINE_PROC,
       path_proc: DEFAULT_PATH_PROC,
