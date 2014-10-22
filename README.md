@@ -54,6 +54,19 @@ end
 
 ![Thor](images/thor.png)
 
+### Tropicana
+
+```ruby
+PryBloodline.configure do |c|
+  c.line_color = :light_green
+  c.name_color = :light_yellow
+  c.path_color = :light_red
+  c.separator = "🍹"
+end
+```
+
+![Tropicana](images/tropicana.png)
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -102,10 +115,10 @@ PryBloodline.configure do |c|
   c.path_color = :light_blue
   c.separator = "\u00BB"
   c.separator_color = :light_green
-  c.name_proc = proc { c.name.colorize(c.name_color) }
-  c.line_proc = proc { |obj, level, pry| "[#{pry.input_array.size}]".colorize(c.line_color) }
-  c.path_proc = proc { |obj, level, pry| "(#{Pry.view_clip(obj)})".colorize(c.path_color) }
-  c.separator_proc = proc { c.separator.colorize(c.separator_color }
+  c.name_proc = -> { c.name.colorize(c.name_color) }
+  c.line_proc = ->(obj, level, pry) { "[#{pry.input_array.size}]".colorize(c.line_color) }
+  c.path_proc = ->(obj, level, pry) { "(#{Pry.view_clip(obj)})".colorize(c.path_color) }
+  c.separator_proc = -> { c.separator.colorize(c.separator_color) }
 end
 ```
 
@@ -113,7 +126,23 @@ This configuration yields this theme:
 
 ![Custom](images/custom.png)
 
+Also you can try out things **live**:
+
+![Live](images/live.png)
+
 Check the source code for more details on this ;)
+
+## Troubleshooting
+
+**I can't see the colors!!**
+
+Make sure your ruby is compiled with readline support. RVM should enable this by
+default, while for rbenv you can run:
+
+```bash
+brew install readline
+RUBY_CONFIGURE_OPTS=--with-readline-dir="$(brew --prefix readline)" rbenv install 2.1.3
+```
 
 ## Contributing
 
