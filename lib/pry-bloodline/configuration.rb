@@ -9,11 +9,11 @@ module PryBloodline
       configuration
     end
 
-    DEFAULT_LINE_PROC = proc do |object, level, _pry_|
+    DEFAULT_LINE_PROC = ->(_, _, _pry_) do
       "[#{_pry_.input_array.size.to_s.bold}]".colorize(c.line_color)
     end
 
-    DEFAULT_PATH_PROC = proc do |object, level, _pry_|
+    DEFAULT_PATH_PROC = ->(_, _, _pry_) do
       _pry_.binding_stack.map.each_with_index do |b, index|
         if index.zero?
           "~"
@@ -23,13 +23,9 @@ module PryBloodline
       end.join("/").colorize(c.path_color)
     end
 
-    DEFAULT_SEPARATOR_PROC = proc do
-      c.separator.colorize(c.separator_color)
-    end
+    DEFAULT_SEPARATOR_PROC = ->{ c.separator.colorize(c.separator_color) }
 
-    DEFAULT_NAME_PROC = proc do
-      c.name.colorize(c.name_color)
-    end
+    DEFAULT_NAME_PROC = ->{ c.name.colorize(c.name_color) }
 
     DEFAULTS = {
       name: "pry",
