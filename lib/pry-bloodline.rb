@@ -5,7 +5,7 @@ require 'colorize'
 require 'pry-bloodline/version'
 require 'pry-bloodline/configuration'
 require 'pry-bloodline/setup'
-require 'pry-bloodline/railtie' if defined?(Rails)
+require 'pry-bloodline/railtie'
 
 module PryBloodline
   class << self
