@@ -14,7 +14,7 @@ Into this:
 
 It's really easy to build your own theme!
 
-#### Freedom
+### Freedom
 
 ```ruby
 PryBloodline.configure do |c|
@@ -28,7 +28,7 @@ end
 
 ![Freedom](images/freedom.png)
 
-#### Blood
+### Blood
 
 ```ruby
 PryBloodline.configure do |c|
